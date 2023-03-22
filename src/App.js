@@ -6,7 +6,7 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                Kriss-cross game
+                Tic-Tak-Toe game
             </header>
             <main>
                 <Game />

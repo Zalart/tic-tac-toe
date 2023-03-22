@@ -2,111 +2,93 @@ import React, {useEffect, useState} from 'react';
 import styles from './GameTable.module.css';
 import Cell from "./Cell";
 
-const GameTable = ({cells, setCells, currentPlayer, setCurrentPlayer, boardSize, winner, setWinner}) => {
-    const [currentCell, setCurrentCell] = useState(0);
+const GameTable = ({
+                       cells,
+                       setCells,
+                       currentPlayer,
+                       setCurrentPlayer,
+                       currentCell,
+                       setCurrentCell,
+                       boardSize,
+                       winner,
+                       setWinner,
+                       winSelect, setWinSelect
+                   }) => {
 
     useEffect(() => {
-        whoSWon(currentCell, boardSize, cells);
-    }, [cells])
+        checkBoard(currentCell, boardSize);
+    }, [cells]);
 
-    function cellClickHandler(index) {
+
+    function cellClickHandler(rowIndex, cellIndex) {
         if (!winner) {         // block the board
-            setCurrentCell(index);
+            setCurrentCell([rowIndex, cellIndex]);
             setCells(prev => {
-                return prev.map((cell, i) => {
-                    if (!cell && i === index) {
-                        return currentPlayer
+                return prev.map((row, i) => {
+                    if (rowIndex === i) {
+                        return row.map((cell, idx) => {
+                            if (!cell && idx === cellIndex) {
+                                return currentPlayer
+                            }
+                            return cell;
+                        })
                     }
-                    return cell;
+                    return row;
                 })
             });
         }
     }
 
-    function whoSWon(idx, size = 3) {
-        // what the values of a cells in a row where is the selected cell at
-        const row = Math.ceil((idx + 1) / size);
-        const firstCellInARow = (size * row) - size;
-        const rowValues = cells.slice(firstCellInARow, firstCellInARow + size);
-        if (rowValues.every(value => value === currentPlayer) && rowValues.length === size) {
-            console.log('1 case')
+    function checkBoard(coords, boardSize) {
+        if (cells[coords[0]] && cells[coords[0]].every(cell => cell === currentPlayer)) { // check horizontal line "—"
             setWinner(currentPlayer);
         }
 
-        // what are the values of a cells in a column where is the selected cell at, check when the value will be set
-        let colData = [cells[idx]];
-        let upIdx = idx;
-        while (upIdx > size - 1) {
-            upIdx -= size;
-            console.log('Upindex', upIdx)
-            colData.unshift(cells[upIdx]);
-        }
-        let downIdx = idx;
-        while (downIdx < size * size - size) { // 3*3 - 3 - 1
-            downIdx += size
-            console.log('DownIndex', downIdx)
-            colData.push(cells[downIdx]);
-        }
-        if (colData.every(value => value === currentPlayer) && colData.length === size) {
-            console.log('2 case')
-            setWinner(currentPlayer);
-        }
-        //
-        upIdx = idx;
-        downIdx = idx;
-        colData = [cells[idx]];
-        while (upIdx > size - 1) {
-            upIdx -= size + 1;
-            console.log('Upindex 45', upIdx)
-            colData.unshift(cells[upIdx]);
-        }
-        while (downIdx < size * size - size - 1) { // 3*3 - 3 - 1
-            downIdx += size + 1
-            console.log('DownIndex 45', downIdx)
-            colData.push(cells[downIdx]);
-        }
-        console.log(colData)
-        if (colData.every(value => value === currentPlayer) && colData.length === size) {
-            console.log('3 case')
+        if (cells.map((row) => row.filter((cell, i) => i === coords[1])).every(cell => cell[0] === currentPlayer)) { // check vertical line "|"
+            setWinSelect(cells.map((row) => row.findIndex((cell, i) => i === coords[1])));
             setWinner(currentPlayer);
         }
 
-        upIdx = idx;
-        downIdx = idx;
-        colData = [cells[idx]];
-        while (upIdx > size - 1) {
-            upIdx -= size - 1;
-            console.log('Upindex -45', upIdx)
-            colData.unshift(cells[upIdx]);
-        }
-        while (downIdx < size * size - size - 1) { // 3*3 - 3 - 1
-            downIdx += size - 1
-            console.log('DownIndex -45', downIdx)
-            colData.push(cells[downIdx]);
-        }
-        console.log(colData)
-        if (colData.every(value => value === currentPlayer) && colData.length === size) {
-            console.log('4 case')
-            setWinner(currentPlayer);
+        if (coords[0] === coords[1]) { // find whether we the move is in diagonal "\"
+            if (cells.map((row, k) => row.filter((cell, i) => i === k)).every(cell => cell[0] === currentPlayer)) {
+                setWinner(currentPlayer);
+            }
         }
 
-        !winner && whoSNext();
+        if (boardSize - coords[0] - 1 === coords[1]) { // find whether we the move is in diagonal "/"
+            if (cells.map((row, k) => row.filter((cell, i) => boardSize - i - 1 === k)).every(cell => cell[0] === currentPlayer)) {
+                setWinner(currentPlayer);
+            }
+        }
+
+        !winner && nextMove();
     }
 
-    function whoSNext() {
-        const cellsSelectedNumber = cells.filter(cell => !cell).length;
-        const nextPlayer = cellsSelectedNumber % 2 === 0 ? 'X' : 'O';
+    function nextMove() {
+        let nextPlayer;
+        if (currentCell.length === 2) {
+            nextPlayer = cells[currentCell[0]][currentCell[1]] === 'O' ? 'X' : 'O';
+        } else {
+            nextPlayer = 'X'
+        }
         setCurrentPlayer(nextPlayer);
     }
 
     return (<>
             <div className={winner ? styles.table + ' ' + styles.winner : styles.table}>
-                {cells.map((cell, index) => {
-                    return <Cell idx={index} content={cell} cellClickHandler={cellClickHandler} size={boardSize}/>
+                {cells.map((row, rowIndex) => {
+                    return row.map((cell, cellIndex) => <Cell key={rowIndex.toString() + cellIndex.toString()}
+                                                              rowIdx={rowIndex}
+                                                              cellIdx={cellIndex}
+                                                              content={cell}
+                                                              cellClickHandler={cellClickHandler}
+                                                              size={boardSize}
+                                                              isSelected={winSelect[rowIndex] === cellIndex}
+                    />)
                 })}
             </div>
             {
-                winner && <div> The winner is {cells[currentCell]}</div>
+                winner && <div> The winner is {cells[currentCell[0]][currentCell[1]]}</div>
             }
         </>
     );
