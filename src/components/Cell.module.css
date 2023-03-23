@@ -1,6 +1,5 @@
 .cell {
-    font-size: 16px;
-    font-size: 8vw;
+    font-size: 6em;
     cursor: pointer;
     background-color: white;
 }

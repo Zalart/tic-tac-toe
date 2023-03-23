@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import GameTable from "./GameTable";
 import styles from './Game.module.css';
 
-const SIZE = 5;
-const GAME_FIELD = Array(SIZE).fill(Array(SIZE).fill(''));
+const SIZE = 3;
+const GAME_FIELD = Array(SIZE).fill(Array(SIZE).fill({value:'', isHighlighted: false}));
 
 console.log(GAME_FIELD)
 const Game = () => {
@@ -11,14 +11,12 @@ const Game = () => {
     const [currentPlayer, setCurrentPlayer] = useState('');
     const [currentCell, setCurrentCell] = useState([])
     const [winner, setWinner] = useState('');
-    const [winSelect, setWinSelect] = useState([]);
 
     function handleResetClick(){
         setCells(GAME_FIELD);
-        setCurrentPlayer('');
         setCurrentCell([]);
+        setCurrentPlayer('');
         setWinner('');
-        setWinSelect([]);
     }
     return (
         <div className={styles.game}>
@@ -32,8 +30,6 @@ const Game = () => {
                 winner={winner}
                 setWinner={setWinner}
                 boardSize={SIZE}
-                winSelect={winSelect}
-                setWinSelect={setWinSelect}
             />
             <button onClick={handleResetClick} type='button' className={styles.button}>Reset</button>
         </div>

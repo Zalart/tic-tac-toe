@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import styles from './GameTable.module.css';
 import Cell from "./Cell";
 
@@ -12,10 +12,10 @@ const GameTable = ({
                        boardSize,
                        winner,
                        setWinner,
-                       winSelect, setWinSelect
                    }) => {
 
     useEffect(() => {
+        console.log('rerender Game table')
         checkBoard(currentCell, boardSize);
     }, [cells]);
 
@@ -27,8 +27,8 @@ const GameTable = ({
                 return prev.map((row, i) => {
                     if (rowIndex === i) {
                         return row.map((cell, idx) => {
-                            if (!cell && idx === cellIndex) {
-                                return currentPlayer
+                            if (!cell.value && idx === cellIndex) {
+                                return {...cell, value: currentPlayer}
                             }
                             return cell;
                         })
@@ -40,23 +40,68 @@ const GameTable = ({
     }
 
     function checkBoard(coords, boardSize) {
-        if (cells[coords[0]] && cells[coords[0]].every(cell => cell === currentPlayer)) { // check horizontal line "—"
+
+        // check horizontal line "—"
+        if (cells[coords[0]] && cells[coords[0]].every(cell => cell.value === currentPlayer)) {
+            setCells(prev => {
+                return prev.map((row, i) => {
+                    if (coords[0] === i) {
+                        return row.map((cell, idx) => {
+                            return {...cell, isHighlighted: true}
+                        })
+                    }
+                    return row;
+                });
+            })
             setWinner(currentPlayer);
         }
 
-        if (cells.map((row) => row.filter((cell, i) => i === coords[1])).every(cell => cell[0] === currentPlayer)) { // check vertical line "|"
-            setWinSelect(cells.map((row) => row.findIndex((cell, i) => i === coords[1])));
+        // check vertical line "|"
+        if (cells.map((row) => row.filter((cell, i) => i === coords[1])).every(cell => cell[0] && cell[0].value === currentPlayer)) {
+            setCells(prev => {
+                return prev.map((row) => {
+                    return row.map((cell, i) => {
+                        if (coords[1] === i) {
+                            return {...cell, isHighlighted: true}
+                        }
+                        return cell
+                    })
+                });
+            })
             setWinner(currentPlayer);
         }
 
-        if (coords[0] === coords[1]) { // find whether we the move is in diagonal "\"
-            if (cells.map((row, k) => row.filter((cell, i) => i === k)).every(cell => cell[0] === currentPlayer)) {
+        // find whether we the move is in diagonal "\"
+        if (coords[0] === coords[1]) { //check to prevent surplus loop
+            if (cells.map((row, k) => row.filter((cell, i) => i === k)).every(cell => cell[0].value && cell[0].value === currentPlayer)) {
+                setCells(prev => {
+                    return prev.map((row, rowIdx) => {
+                        return row.map((cell, cellIdx) => {
+                            if (rowIdx === cellIdx) {
+                                return {...cell, isHighlighted: true}
+                            }
+                            return cell;
+                        })
+                    })
+                })
                 setWinner(currentPlayer);
             }
         }
 
-        if (boardSize - coords[0] - 1 === coords[1]) { // find whether we the move is in diagonal "/"
-            if (cells.map((row, k) => row.filter((cell, i) => boardSize - i - 1 === k)).every(cell => cell[0] === currentPlayer)) {
+        // find whether we the move is in diagonal "/"
+
+        if (boardSize - coords[0] - 1 === coords[1]) {  //check to prevent surplus loop
+            if (cells.map((row, k) => row.filter((cell, i) => boardSize - 1 - i === k)).every(cell => cell[0].value === currentPlayer)) {
+                setCells(prev => {
+                    return prev.map((row, rowIdx) => {
+                        return row.map((cell, cellIdx) => {
+                            if (boardSize - 1 - cellIdx === rowIdx) {
+                                return {...cell, isHighlighted: true}
+                            }
+                            return cell;
+                        })
+                    })
+                })
                 setWinner(currentPlayer);
             }
         }
@@ -66,8 +111,8 @@ const GameTable = ({
 
     function nextMove() {
         let nextPlayer;
-        if (currentCell.length === 2) {
-            nextPlayer = cells[currentCell[0]][currentCell[1]] === 'O' ? 'X' : 'O';
+        if (currentCell.length === 2) { // if game in progress and coordinates of move are saved
+            nextPlayer = cells[currentCell[0]][currentCell[1]].value === 'O' ? 'X' : 'O';
         } else {
             nextPlayer = 'X'
         }
@@ -80,15 +125,15 @@ const GameTable = ({
                     return row.map((cell, cellIndex) => <Cell key={rowIndex.toString() + cellIndex.toString()}
                                                               rowIdx={rowIndex}
                                                               cellIdx={cellIndex}
-                                                              content={cell}
+                                                              content={cell.value}
                                                               cellClickHandler={cellClickHandler}
                                                               size={boardSize}
-                                                              isSelected={winSelect[rowIndex] === cellIndex}
+                                                              isSelected={cell.isHighlighted}
                     />)
                 })}
             </div>
             {
-                winner && <div> The winner is {cells[currentCell[0]][currentCell[1]]}</div>
+                winner && <div> The winner is {cells[currentCell[0]][currentCell[1]].value}</div>
             }
         </>
     );
