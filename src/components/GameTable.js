@@ -12,10 +12,12 @@ const GameTable = ({
                        boardSize,
                        winner,
                        setWinner,
+                       currentMove,
+                       setCurrentMove
                    }) => {
 
     useEffect(() => {
-        console.log('rerender Game table')
+        console.log('rerender the table')
         checkBoard(currentCell, boardSize);
     }, [cells]);
 
@@ -23,6 +25,7 @@ const GameTable = ({
     function cellClickHandler(rowIndex, cellIndex) {
         if (!winner) {         // block the board
             setCurrentCell([rowIndex, cellIndex]);
+            setCurrentMove(prev=> ++prev);
             setCells(prev => {
                 return prev.map((row, i) => {
                     if (rowIndex === i) {
@@ -40,13 +43,16 @@ const GameTable = ({
     }
 
     function checkBoard(coords, boardSize) {
-
+        // fallback to draw
+        if (!winner && currentMove === boardSize * boardSize) {
+            setWinner('-');
+        }
         // check horizontal line "—"
         if (cells[coords[0]] && cells[coords[0]].every(cell => cell.value === currentPlayer)) {
             setCells(prev => {
                 return prev.map((row, i) => {
                     if (coords[0] === i) {
-                        return row.map((cell, idx) => {
+                        return row.map((cell) => {
                             return {...cell, isHighlighted: true}
                         })
                     }
@@ -89,7 +95,6 @@ const GameTable = ({
         }
 
         // find whether we the move is in diagonal "/"
-
         if (boardSize - coords[0] - 1 === coords[1]) {  //check to prevent surplus loop
             if (cells.map((row, k) => row.filter((cell, i) => boardSize - 1 - i === k)).every(cell => cell[0].value === currentPlayer)) {
                 setCells(prev => {
@@ -106,7 +111,8 @@ const GameTable = ({
             }
         }
 
-        !winner && nextMove();
+           !winner && nextMove();
+
     }
 
     function nextMove() {
@@ -120,7 +126,9 @@ const GameTable = ({
     }
 
     return (<>
-            <div className={winner ? styles.table + ' ' + styles.winner : styles.table}>
+            <div
+                className={winner ? styles.table + ' ' + styles.winner : styles.table}
+                style={{gap: `${(boardSize + 1) * 0.1}rem`}}>
                 {cells.map((row, rowIndex) => {
                     return row.map((cell, cellIndex) => <Cell key={rowIndex.toString() + cellIndex.toString()}
                                                               rowIdx={rowIndex}
@@ -129,11 +137,18 @@ const GameTable = ({
                                                               cellClickHandler={cellClickHandler}
                                                               size={boardSize}
                                                               isSelected={cell.isHighlighted}
+                                                              currentPlayer={currentPlayer}
+                                                              winner={winner}
                     />)
                 })}
             </div>
             {
-                winner && <div> The winner is {cells[currentCell[0]][currentCell[1]].value}</div>
+                winner === '-' && <div>Draw \ -_- /</div>
+            }
+            {
+
+                winner && winner !== '-' && <div> The winner is {cells[currentCell[0]][currentCell[1]].value}</div>
+
             }
         </>
     );

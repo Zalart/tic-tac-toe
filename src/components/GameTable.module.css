@@ -1,14 +1,12 @@
 .table {
-    height: 600px;
-    width: 600px;
+    width: 50vmin;
+    height: 50vmin;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 1px;
-    background-color: black;
 }
 
 .winner {
-    opacity: 0.1;
+    opacity: 0.2;
 }

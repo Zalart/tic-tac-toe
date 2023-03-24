@@ -1,7 +1,16 @@
 .cell {
     font-size: 6em;
     cursor: pointer;
-    background-color: white;
+    background-color: lightgrey;
+    display: flex;
+}
+
+.cell:hover {
+    background-color: lightsteelblue;
+}
+.cell img {
+    margin: auto;
+    width: 60%;
 }
 .selected {
     background-color: palevioletred;

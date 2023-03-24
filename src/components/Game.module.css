@@ -1,9 +1,7 @@
 .game {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}
-.button {
-    margin: 3rem;
+    gap: 2rem;
 }

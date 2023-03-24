@@ -1,25 +1,41 @@
 import React, {useState} from 'react';
 import GameTable from "./GameTable";
 import styles from './Game.module.css';
+import Select from "./Select";
+import ResetButton from "./ResetButton";
 
-const SIZE = 3;
-const GAME_FIELD = Array(SIZE).fill(Array(SIZE).fill({value:'', isHighlighted: false}));
-
-console.log(GAME_FIELD)
 const Game = () => {
-    const [cells, setCells] = useState(GAME_FIELD);
+    const [size, setSize] = useState(3);
+    const [cells, setCells] = useState(fillTable(size));
     const [currentPlayer, setCurrentPlayer] = useState('');
-    const [currentCell, setCurrentCell] = useState([])
+    const [currentCell, setCurrentCell] = useState([]);
+    const [currentMove, setCurrentMove] = useState(0);
     const [winner, setWinner] = useState('');
 
-    function handleResetClick(){
-        setCells(GAME_FIELD);
+    function fillTable(n) {
+        return Array(n).fill(Array(n).fill({value:'', isHighlighted: false}))
+    }
+
+    function changeTableSize(newSize) {
+        setSize(newSize);
+        setCells(fillTable(newSize));
         setCurrentCell([]);
         setCurrentPlayer('');
         setWinner('');
+        setCurrentMove(0);
+
+    }
+
+    function handleResetTable(){
+        setCells(fillTable(size));
+        setCurrentCell([]);
+        setCurrentPlayer('');
+        setWinner('');
+        setCurrentMove(0);
     }
     return (
         <div className={styles.game}>
+            <Select size={size} changeTableSize={changeTableSize} />
             <GameTable
                 cells={cells}
                 setCells={setCells}
@@ -29,9 +45,12 @@ const Game = () => {
                 setCurrentCell={setCurrentCell}
                 winner={winner}
                 setWinner={setWinner}
-                boardSize={SIZE}
+                boardSize={size}
+                currentMove={currentMove}
+                setCurrentMove={setCurrentMove}
             />
-            <button onClick={handleResetClick} type='button' className={styles.button}>Reset</button>
+            <ResetButton restartHandler={handleResetTable} />
+            {/*<button onClick={handleResetTable} >Reset</button>*/}
         </div>
     );
 };
