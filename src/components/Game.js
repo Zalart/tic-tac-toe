@@ -1,57 +1,56 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useSelector, useDispatch} from "react-redux";
+import {
+    setSize,
+    createCells,
+    setCurrentPlayer,
+    setCurrentCell,
+    setWinner
+} from "../store/features/gameTable/gameTableSlice";
 import GameTable from "./GameTable";
 import styles from './Game.module.css';
 import Select from "./Select";
 import ResetButton from "./ResetButton";
+import Modal from "./Modal/Modal";
 
 const Game = () => {
-    const [size, setSize] = useState(3);
-    const [cells, setCells] = useState(fillTable(size));
-    const [currentPlayer, setCurrentPlayer] = useState('');
-    const [currentCell, setCurrentCell] = useState([]);
-    const [currentMove, setCurrentMove] = useState(0);
-    const [winner, setWinner] = useState('');
-
-    function fillTable(n) {
-        return Array(n).fill(Array(n).fill({value:'', isHighlighted: false}))
-    }
+    const size = useSelector((state) => state.board.size);
+    const winner = useSelector((state) => state.board.winner);
+    const dispatch = useDispatch();
 
     function changeTableSize(newSize) {
-        setSize(newSize);
-        setCells(fillTable(newSize));
-        setCurrentCell([]);
-        setCurrentPlayer('');
-        setWinner('');
-        setCurrentMove(0);
-
+        dispatch(setSize(newSize));
+        handleResetTable(newSize);
     }
 
-    function handleResetTable(){
-        setCells(fillTable(size));
-        setCurrentCell([]);
-        setCurrentPlayer('');
-        setWinner('');
-        setCurrentMove(0);
+    function handleResetTable(size){
+        dispatch(createCells({size}));
+        dispatch(setCurrentCell([]));
+        dispatch(setCurrentPlayer({currentPlayer: ''}));
+        dispatch(setWinner(''));
+    }
+    function closeGameResults() {
+        dispatch(setWinner(''));
+        handleResetTable(size);
     }
     return (
+        <>
         <div className={styles.game}>
             <Select size={size} changeTableSize={changeTableSize} />
             <GameTable
-                cells={cells}
-                setCells={setCells}
-                currentPlayer={currentPlayer}
-                setCurrentPlayer={setCurrentPlayer}
-                currentCell={currentCell}
-                setCurrentCell={setCurrentCell}
                 winner={winner}
                 setWinner={setWinner}
                 boardSize={size}
-                currentMove={currentMove}
-                setCurrentMove={setCurrentMove}
             />
-            <ResetButton restartHandler={handleResetTable} />
-            {/*<button onClick={handleResetTable} >Reset</button>*/}
+            <ResetButton restartHandler={() => handleResetTable(size)} />
         </div>
+            <Modal title='Game Over' visible={winner} setVisible={closeGameResults}>
+                {winner === '-' && <div>Draw \ -_- /</div>}
+                {
+                    winner && winner !== '-' && <div>The winner is {winner}</div>
+                }
+            </Modal>
+        </>
     );
 };
 

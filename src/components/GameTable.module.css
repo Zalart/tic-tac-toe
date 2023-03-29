@@ -10,3 +10,8 @@
 .winner {
     opacity: 0.2;
 }
+
+.status {
+    height: 2rem;
+    padding: 2rem;
+}
