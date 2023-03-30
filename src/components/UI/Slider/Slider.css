@@ -65,20 +65,20 @@
     }
 
     .customSlider-track {
-        top: 10px;
-        height: 8px;
+        top: 15px;
+        height: 12px;
     }
 
     .customSlider-thumb {
-        width: 30px;
-        height: 30px;
+        width: 44px;
+        height: 44px;
     }
 
     .customSlider-mark {
         cursor: pointer;
-        top: 6px;
-        width: 3px;
-        height: 16px;
-        margin: 0 calc(15px);
+        top: 9px;
+        width: 4px;
+        height: 24px;
+        margin: 0 calc(22px);
     }
 }

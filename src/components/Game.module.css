@@ -1,18 +1,28 @@
 .game {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 2rem;
 }
 .resizeControl, .restartControl {
     width: 450px;
-    margin-bottom: 4rem;
     font-size: 2rem;
+    margin-bottom: 4rem;
 }
 
 @media(max-width: 1600px) {
     .game {
         flex-direction: column;
+    }
+}
+
+@media(max-width: 768px) {
+    .game {
+        flex-direction: column;
+    }
+
+    .resizeControl, .restartControl {
+        width: 300px;
+        font-size: 1.5rem;
     }
 }
