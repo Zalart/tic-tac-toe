@@ -58,3 +58,27 @@
 .caption-active {
     color: red;
 }
+
+@media(max-width: 768px) {
+    .customSlider {
+        max-width: 300px;
+    }
+
+    .customSlider-track {
+        top: 10px;
+        height: 8px;
+    }
+
+    .customSlider-thumb {
+        width: 30px;
+        height: 30px;
+    }
+
+    .customSlider-mark {
+        cursor: pointer;
+        top: 6px;
+        width: 3px;
+        height: 16px;
+        margin: 0 calc(15px);
+    }
+}
