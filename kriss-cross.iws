@@ -4,17 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a44c7c2a-a1fd-4cab-aa40-30637797f82f" name="Changes" comment="Redux store, modal component">
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Slider/Slider.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UI/Slider/Slider.js" afterDir="false" />
+    <list default="true" id="a44c7c2a-a1fd-4cab-aa40-30637797f82f" name="Changes" comment="Slider size component">
       <change beforePath="$PROJECT_DIR$/kriss-cross.iws" beforeDir="false" afterPath="$PROJECT_DIR$/kriss-cross.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Game.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Game.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Game.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Select.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Select.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GameTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/GameTable.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UI/Slider/Slider.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Slider/Slider.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +101,7 @@
       <updated>1679391377522</updated>
       <workItem from="1679391380723" duration="88396000" />
       <workItem from="1679673487554" duration="808000" />
-      <workItem from="1679999424282" duration="34832000" />
+      <workItem from="1679999424282" duration="39187000" />
     </task>
     <task id="LOCAL-00001" summary="Flat array">
       <created>1679434636268</created>
@@ -156,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680087380805</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Slider size component">
+      <created>1680165283612</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680165283612</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -193,6 +196,7 @@
     <MESSAGE value="build" />
     <MESSAGE value="Update project settings to deploy to ghp" />
     <MESSAGE value="Redux store, modal component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Redux store, modal component" />
+    <MESSAGE value="Slider size component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slider size component" />
   </component>
 </project>

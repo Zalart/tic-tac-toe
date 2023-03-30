@@ -6,10 +6,13 @@
     gap: 2rem;
 }
 .resizeControl, .restartControl {
-    width: 300px;
-    margin-bottom: 2rem;
+    width: 450px;
+    margin-bottom: 4rem;
+    font-size: 2rem;
 }
 
-.restartControl {
-    text-align: left;
+@media(max-width: 1600px) {
+    .game {
+        flex-direction: column;
+    }
 }

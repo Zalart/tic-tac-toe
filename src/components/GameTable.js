@@ -13,14 +13,25 @@ import {
 
 
 const GameTableStyled = styled.div`
-  width: 50vmin;
-  height: 50vmin;
+  width: calc(60vmin - 15vh);
+  height: calc(60vmin - 15vh);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   opacity: ${props => props.winner ? 0.2 : 1};
   gap: ${props => (props.boardSize + 1) * 0.1}rem;
+  
+ 
+      @media(max-width: 1600px) {
+        width: 50vmin;
+        height: 50vmin;
+  }
+  
+    @media(max-width: 768px) {
+        width: 90vw;
+        height: 90vw;
+  }
 `;
 
 const GameTable = ({winner, boardSize}) => {
