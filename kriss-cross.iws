@@ -4,19 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a44c7c2a-a1fd-4cab-aa40-30637797f82f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Modal/Modal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/features/gameTable/gameTableSlice.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/store.js" afterDir="false" />
+    <list default="true" id="a44c7c2a-a1fd-4cab-aa40-30637797f82f" name="Changes" comment="Redux store, modal component">
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Slider/Slider.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/UI/Slider/Slider.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kriss-cross.iws" beforeDir="false" afterPath="$PROJECT_DIR$/kriss-cross.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Cell.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Cell.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Game.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Game.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GameTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/GameTable.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/GameTable.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResetButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResetButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Game.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Game.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Modal/Modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UI/Modal/Modal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Select.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Select.module.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +33,10 @@
             <RecentBranchesForRepo>
               <option name="branches">
                 <list>
+                  <RecentBranch>
+                    <option name="branchName" value="slider-select" />
+                    <option name="lastUsedInstant" value="1680089660" />
+                  </RecentBranch>
                   <RecentBranch>
                     <option name="branchName" value="redux-store" />
                     <option name="lastUsedInstant" value="1679999481" />
@@ -80,7 +82,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+    "settings.editor.selected.configurable": "application.passwordSafe"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -88,6 +90,9 @@
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/assets/images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/UI" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -100,7 +105,7 @@
       <updated>1679391377522</updated>
       <workItem from="1679391380723" duration="88396000" />
       <workItem from="1679673487554" duration="808000" />
-      <workItem from="1679999424282" duration="20955000" />
+      <workItem from="1679999424282" duration="34832000" />
     </task>
     <task id="LOCAL-00001" summary="Flat array">
       <created>1679434636268</created>
@@ -144,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679672489772</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Redux store, modal component">
+      <created>1680087380805</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1680087380805</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +192,7 @@
     <MESSAGE value="Svg instead of X O, Reset Button" />
     <MESSAGE value="build" />
     <MESSAGE value="Update project settings to deploy to ghp" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update project settings to deploy to ghp" />
+    <MESSAGE value="Redux store, modal component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Redux store, modal component" />
   </component>
 </project>

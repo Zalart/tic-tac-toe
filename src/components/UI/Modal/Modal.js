@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
-import close from '../../assets/images/cross.svg';
+import close from '../../../assets/images/cross.svg';
 
 const scale = keyframes`
 from {
@@ -30,6 +30,7 @@ display: ${({active}) => active ? 'flex' : 'none'};
 justify-content: ${({active}) => active && 'center'};
 align-items: ${({active}) => active && 'center'};
 background: rgba(0,0,0, 0.5);
+z-index: 2;
 `;
 
 const ContainerStyled = styled.div`

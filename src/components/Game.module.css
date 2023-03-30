@@ -5,3 +5,11 @@
     align-items: center;
     gap: 2rem;
 }
+.resizeControl, .restartControl {
+    width: 300px;
+    margin-bottom: 2rem;
+}
+
+.restartControl {
+    text-align: left;
+}
